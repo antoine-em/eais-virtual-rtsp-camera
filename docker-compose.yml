@@ -9,6 +9,10 @@ services:
     ports:
       - "8554:8554"
       # - "8555:8555"   # cameras with their own `port:` in cameras.yaml
+      # UDP ports for RTP/RTCP when clients use UDP transport (e.g., GStreamer
+      # Discoverer). Each camera instance uses 8 consecutive ports starting from
+      # 8000 (see UDP_BLOCK_SIZE in src/vcam/mediamtx.py).
+      - "8000-8007:8000-8007/udp"
     volumes:
       - ./cameras.yaml:/vcam/cameras.yaml:ro
       - ./videos:/vcam/videos:ro
